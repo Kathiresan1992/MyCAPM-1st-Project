@@ -1,0 +1,87 @@
+    ###Get Service document
+    GET http://localhost:4004/odata/v4/CatalogService/$metadata
+
+###Get Top 2 employees
+GET http://localhost:4004/odata/v4/CatalogService/EmployeeSet/$count
+
+###Get Top 2 employees
+GET http://localhost:4004/odata/v4/CatalogService/EmployeeSet?$filter=nameFirst eq 'Janani'
+
+###Boosting a order
+POST http://localhost:4004/odata/v4/CatalogService/EmployeeSet/ff65a315-2243-4aed-9092-55c2859bd6a1/CatalogService.increase
+Content-Type: application/json
+
+{} 
+
+
+
+### Create new employee data
+POST  http://localhost:4004/odata/v4/CatalogService/EmployeeSet
+Content-Type: application/json
+
+{      
+    "nameFirst": "Janani",
+    "nameMiddle": null,
+    "nameLast": "K",
+    "nameInitials": null,
+    "sex": "M",
+    "language": "E",
+    "phoneNumber": "+91 9035244062",
+    "email": "jkathiresanmca@gmail.com",
+    "loginName": "SPRINGS",
+    "Currency_code": "USD",
+    "salaryAmount": 10001235,
+    "accountNumber": "111222333",
+    "bankId": "51000065512",
+    "bankName": "My Bank of Antioch"
+}
+
+### Update data
+PATCH http://localhost:4004/odata/v4/CatalogService/EmployeeSet/01f1e217-2d23-4265-ad3d-440bd6f7121c
+Content-Type: application/json
+
+{
+    "nameFirst": "KATHIRESAN"
+}
+
+### Delete data
+
+DELETE http://localhost:4004/odata/v4/CatalogService/EmployeeSet/c04aaf1f-7590-4d2f-8880-9965ba0fc9b8
+
+### Get the detleted data
+GET http://localhost:4004/odata/v4/CatalogService/EmployeeSet/c04aaf1f-7590-4d2f-8880-9965ba0fc9b8
+
+### Get POs data
+GET http://localhost:4004/odata/v4/CatalogService/POs
+
+### Get Single POs data - Join was carried out for given single PO
+GET http://localhost:4004/odata/v4/CatalogService/POs/74867AD200E41EDBA5D8B0C98DC28052?$expand=Items
+
+###Boosting a order
+POST http://localhost:4004/odata/v4/CatalogService/POs/74867AD200E41EDBA5D8B0C98DC28052/boost
+Content-Type: application/json
+
+{}
+
+###Largest order
+GET http://localhost:4004/odata/v4/CatalogService/POs('74867AD200E41EDBA5D8B0C98DC28052')/CatalogService.largestOrder
+
+###Reading ReadEmployeeSrv
+GET http://localhost:4004/odata/v4/myService/ReadEmployeeSrv/02BD2137-0890-1EEA-A6C2-BB55C19787FB
+
+###Boosting a order
+POST http://localhost:4004/odata/v4/CatalogService/POs('74867AD200E41EDBA5D8B0C98DC28052')/boost
+Content-Type: application/json
+
+{} 
+
+###Reading a order
+GET http://localhost:4004/odata/v4/CatalogService/POs('74867AD200E41EDBA5D8B0C98DC28052')
+
+### Update data
+PATCH http://localhost:4004/odata/v4/CatalogService/POs/74867AD200E41EDBA5D8B0C98DC28052
+Content-Type: application/json
+
+{
+    "GROSS_AMOUNT": "20000"
+}
