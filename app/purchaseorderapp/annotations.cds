@@ -45,7 +45,7 @@ annotate service.POs with @(
         TypeNamePlural: 'Purchase Orders',
         Title: {
             Label: 'PO Number',
-            Value: 'PO_ID'
+            Value: PO_ID
         },
         Description: {
             Value: PARTNER_GUID.COMPANY_NAME

@@ -12,15 +12,19 @@ using { anubhav.db } from '../db/datamodel';
 using { cappo.cds } from '../db/CDSViews';
 
 
-service CatalogService @(path:'CatalogService') {
+service CatalogService @(path:'CatalogService', requires:'authenticated-user') {
 
     // @Capabilities : { Insertable,Updatable, Deletable: false }
     entity BusinessPartnerSet as projection on db.master.businesspartner;
     entity AddressSet as projection on db.master.address;
-    // @readonly
-    entity EmployeeSet as projection on db.master.employees actions{
-        action increase();
-    };
+
+    entity EmployeeSet @(restrict:[
+        {grant: ['READ'], to:'Viewer', where: 'bankName = $user.BankName'},
+        {grant: ['WRITE'], to:'Admin'}
+    ]) as projection on db.master.employees;
+    // actions{
+    //     action increase();
+    // };
     entity PurchaseOrderItems as projection on db.transaction.poitems;
     function getOrderDefaults() returns POs;
     entity POs @(
